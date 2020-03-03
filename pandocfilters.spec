@@ -4,27 +4,34 @@
 #
 Name     : pandocfilters
 Version  : 1.4.2
-Release  : 23
+Release  : 24
 URL      : https://pypi.debian.net/pandocfilters/pandocfilters-1.4.2.tar.gz
 Source0  : https://pypi.debian.net/pandocfilters/pandocfilters-1.4.2.tar.gz
 Summary  : Utilities for writing pandoc filters in python
 Group    : Development/Tools
 License  : BSD-3-Clause
-Requires: pandocfilters-python3
-Requires: pandocfilters-python
-BuildRequires : pbr
-BuildRequires : pip
-
-BuildRequires : python3-dev
-BuildRequires : setuptools
+Requires: pandocfilters-license = %{version}-%{release}
+Requires: pandocfilters-python = %{version}-%{release}
+Requires: pandocfilters-python3 = %{version}-%{release}
+BuildRequires : buildreq-distutils3
 
 %description
+pandocfilters
 =============
+A python module for writing `pandoc <http://pandoc.org/>`_ filters
+
+%package license
+Summary: license components for the pandocfilters package.
+Group: Default
+
+%description license
+license components for the pandocfilters package.
+
 
 %package python
 Summary: python components for the pandocfilters package.
 Group: Default
-Requires: pandocfilters-python3
+Requires: pandocfilters-python3 = %{version}-%{release}
 
 %description python
 python components for the pandocfilters package.
@@ -34,6 +41,7 @@ python components for the pandocfilters package.
 Summary: python3 components for the pandocfilters package.
 Group: Default
 Requires: python3-core
+Provides: pypi(pandocfilters)
 
 %description python3
 python3 components for the pandocfilters package.
@@ -41,24 +49,39 @@ python3 components for the pandocfilters package.
 
 %prep
 %setup -q -n pandocfilters-1.4.2
+cd %{_builddir}/pandocfilters-1.4.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1523295864
-python3 setup.py build -b py3
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1583199913
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
 %install
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/pandocfilters
+cp %{_builddir}/pandocfilters-1.4.2/LICENSE %{buildroot}/usr/share/package-licenses/pandocfilters/9990e0fc59b210f7995dbe22caeb082cae511080
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/pandocfilters/9990e0fc59b210f7995dbe22caeb082cae511080
 
 %files python
 %defattr(-,root,root,-)
