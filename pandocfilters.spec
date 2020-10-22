@@ -4,7 +4,7 @@
 #
 Name     : pandocfilters
 Version  : 1.4.2
-Release  : 25
+Release  : 26
 URL      : https://pypi.debian.net/pandocfilters/pandocfilters-1.4.2.tar.gz
 Source0  : https://pypi.debian.net/pandocfilters/pandocfilters-1.4.2.tar.gz
 Summary  : Utilities for writing pandoc filters in python
@@ -16,9 +16,7 @@ Requires: pandocfilters-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 
 %description
-pandocfilters
 =============
-A python module for writing `pandoc <http://pandoc.org/>`_ filters
 
 %package license
 Summary: license components for the pandocfilters package.
@@ -56,12 +54,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1583199913
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1603397523
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
