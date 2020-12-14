@@ -4,7 +4,7 @@
 #
 Name     : pandocfilters
 Version  : 1.4.2
-Release  : 27
+Release  : 28
 URL      : https://pypi.debian.net/pandocfilters/pandocfilters-1.4.2.tar.gz
 Source0  : https://pypi.debian.net/pandocfilters/pandocfilters-1.4.2.tar.gz
 Summary  : Utilities for writing pandoc filters in python
