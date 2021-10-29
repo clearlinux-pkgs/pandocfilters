@@ -4,7 +4,7 @@
 #
 Name     : pandocfilters
 Version  : 1.4.3
-Release  : 37
+Release  : 38
 URL      : https://files.pythonhosted.org/packages/28/78/bd59a9adb72fa139b1c9c186e6f65aebee52375a747e4b6a6dcf0880956f/pandocfilters-1.4.3.tar.gz
 Source0  : https://files.pythonhosted.org/packages/28/78/bd59a9adb72fa139b1c9c186e6f65aebee52375a747e4b6a6dcf0880956f/pandocfilters-1.4.3.tar.gz
 Summary  : Utilities for writing pandoc filters in python
